@@ -1,65 +1,151 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-
-body {
+/****************************************************
+ * Goal 5: CSS Counters + Body Styles
+ ****************************************************/
+ body {
+    /* Background color for the entire page */
+    background-color: #f0e6ff; /* a soft pastel purple */
+    
+    /* If you want something more vibrant, try another color or gradient:
+       background: linear-gradient(45deg, #f06, #ff9 100%);
+    */
+    
+    margin: 0;         /* remove default browser margins */
+    padding: 0;        /* remove default browser padding */
+    font-family: Arial, sans-serif;
+  
+    /* Counter reset for headings, if using counters (Goal 5) */
+    counter-reset: x;
+  }
+  
+  /* If you have any H2 headings, you can show counters with a pseudo-element */
+  h2::after {
+    counter-increment: x;           /* increment by 1 for every H2 */
+    content: " " counter(x) ": ";   /* display the current counter value and a colon */
+  }
+  
+  /****************************************************
+   * Goal 1: Flex Container
+   ****************************************************/
+  .flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row;
+    justify-content: flex-start; /* horizontal alignment */
+    align-items: stretch;        /* vertical alignment of items */
+    align-content: stretch;      /* alignment for multiple lines */
+    flex-wrap: nowrap;           /* single-line container */
+    overflow: scroll;            /* scroll horizontally if content is wide */
+    margin-bottom: 2rem;         /* spacing below the container */
+    
+    /* A bold background for the flex container to make it stand out */
+    background-color: #ffe4e1;   /* a pastel pink color (MistyRose) */
+  
+    /* Goal 3: Box-shadow on a block-level element */
+    box-shadow: 4px 4px 20px 0 rgba(12, 11, 11, 0.7),
+                4px 6px 20px 0 rgba(200, 236, 200, 0.5);
+  }
+  
+  .flex-item {
+    flex: flex-start;    /* sets alignment in short form, can be simplified */
+    align-self: stretch; /* override container align-items if needed */
+    flex-grow: 0;        /* do not expand beyond the defined basis */
+    flex-shrink: 0;      /* do not shrink below the defined basis */
+    flex-basis: 250px;   /* effectively "width: 250px" for the flex item */
+    margin: 0.5rem;      /* spacing around each item */
+  
+    /* Optional background to separate each item visually */
+    background-color: #fffaf0; /* a very light yellow (FloralWhite) */
+    border: 1px solid #ccc;
+    border-radius: 5px; /* slight rounding of corners */
+  }
+  
+  /****************************************************
+   * Goal 2: Grid Container
+   ****************************************************/
+   .grid-container {
+    display: grid;
+    /* 3 columns of equal width: 1fr each */
+    grid-template-columns: repeat(3, 1fr);
+    /* row heights can be fixed or automatic */
+    grid-auto-rows: auto; /* if you want each row height to fit the image */
+    gap: 0.5rem; 
+    margin-bottom: 2rem; 
+    background-color: #e0ffe0; /* optional background */
+  }
+  
+  /* Each cell in the grid could have styling */
+  .grid-container > div {
+    border: 1px solid #ccc;
+    display: flex;            /* so we can easily center the image if desired */
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 5px;
+  }
+  
+  /* Force all images in the grid to the same width */
+  .grid-container img {
+    width: 100%;  /* fill the grid cell’s width */
+    height: 300; /* keep the aspect ratio intact */
+    display: block; /* remove the extra spacing that inline images sometimes add */
+  }
+  
+  
+  /****************************************************
+   * Goal 4: Dropdown
+   ****************************************************/
+  ul {
+    list-style-type: none;  /* remove default bullets */
     margin: 0;
     padding: 0;
-    font-family: 'Orbitron', sans-serif;
-    background-color: #0d0d0d;
-    color: #fff;
-    text-align: center;
-}
-
-header {
-    background: linear-gradient(90deg, #ff00ff, #00ffff);
-    padding: 20px;
-    text-shadow: 0 0 10px #ff00ff;
-}
-
-h1 {
-    font-size: 2.5em;
-    color: #ff00ff;
-    animation: glow 1.5s infinite alternate;
-}
-
-@keyframes glow {
-    from { text-shadow: 0 0 10px #ff00ff; }
-    to { text-shadow: 0 0 20px #00ffff; }
-}
-
-section {
-    margin: 50px 20px;
-    padding: 20px;
-    border-radius: 10px;
-    background: rgba(255, 0, 255, 0.1);
-    box-shadow: 0 0 10px #ff00ff;
-}
-
-input, textarea, button {
+  
+    /* A more colorful background for the nav bar */
+    background: #6495ed;    /* CornflowerBlue */
+  }
+  
+  .dropdown {
+    position: relative;     /* for absolute positioning of dropdown-content */
+    display: inline-block;  /* place multiple dropdowns side-by-side */
+    margin: 1rem;           /* spacing */
+  }
+  
+  /* The link or button inside the dropdown */
+  .dropdown > div > a {
+    text-decoration: none;
+    color: #000;
+    padding: 8px 12px;
+    background: #ffebcd; /* BlanchedAlmond */
+    display: inline-block;
+    border-radius: 5px;  /* optional corner rounding */
+  }
+  
+  /* Hidden by default */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff8dc; /* Cornsilk background */
+    min-width: 160px;
+    box-shadow: 8px 8px 16px 0 rgba(216, 230, 31, 0.836),
+                8px 8px 16px 0 rgba(187, 116, 116, 0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    border-radius: 5px; /* round corners */
+  }
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
     display: block;
-    width: 80%;
-    margin: 10px auto;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-}
-
-input, textarea {
-    background: #222;
-    color: #fff;
-    outline: none;
-    box-shadow: 0 0 5px #00ffff;
-}
-
-button {
-    background: #ff00ff;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 0 10px #ff00ff;
-}
-
-button:hover {
-    background: #00ffff;
-    box-shadow: 0 0 15px #00ffff;
-}
+    color: black;
+  }
+  
+  /* Optional styling for list inside dropdown */
+  .dropdown-content ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .dropdown-content li {
+    padding: 4px 0;
+  }
+  
